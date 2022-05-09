@@ -1,4 +1,6 @@
-!/bin/bash
+#!/bin/bash
+
+#Reach out to @MakMahlawat for any issues.
 
 # Step 1 = Determines the OS Distribution
 # Step 2 = Determines the OS Version ID
@@ -10,12 +12,12 @@
 function editzabbixconf()
 {
 echo ========================================================================
-echo Step 3 = Downloading Zabbix Repository and Installing Zabbix-Agent 
+echo Step 3 = Downloading Zabbix Repository and Installing Zabbix-Agent	
 echo !! 3 !! Zabbix-Agent Installed
 echo ========================================================================
 
 mv /etc/zabbix/zabbix_agentd.conf /etc/zabbix/zabbix_agentd.conf.original
-cp /etc/zabbix/zabbix_agentd.conf.original /etc/zabbix/zabbix_agentd.conf       
+cp /etc/zabbix/zabbix_agentd.conf.original /etc/zabbix/zabbix_agentd.conf	
 sed -i "s+Server=127.0.0.1+Server=2.136.139.176+g" /etc/zabbix/zabbix_agentd.conf
 sed -i "s+ServerActive=127.0.0.1+ServerActive=2.136.139.176:10051+g" /etc/zabbix/zabbix_agentd.conf
 sed -i "s+Hostname=Zabbix server+Hostname=$(hostname -f)+g" /etc/zabbix/zabbix_agentd.conf
@@ -28,6 +30,7 @@ echo !! 4 !! Enabled Zabbix-Agent Service to Auto Start at Boot Time
 echo !! 4 !! Restarted Zabbix-Agent post updating conf file
 echo ========================================================================
 }
+
 
 function ifexitiszero()
 {
@@ -341,4 +344,5 @@ echo To check zabbix-agent service status, you may run : service zabbix-agent st
 echo To check zabbix-agent config, you may run : egrep -v '"^#|^$"' /etc/zabbix/zabbix_agentd.conf
 echo To check zabbix-agent logs, you may run : tail -f /var/log/zabbix/zabbix_agentd.log
 echo ========================================================================
+
 sudo ufw allow 10050/tcp
